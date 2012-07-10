@@ -46,11 +46,10 @@ class BspBuilder
 
   def chop_volume(node, direction)
     if direction == :vertical
-      return_hash = { :width => halve(node.width), :height => node.height }
+      { :width => halve(node.width), :height => node.height }
     else
-      return_hash = { :width => node.width, :height => halve(node.height) }
+      { :width => node.width, :height => halve(node.height) }
     end
-    return_hash
   end
 
   def halve(integer_no)
