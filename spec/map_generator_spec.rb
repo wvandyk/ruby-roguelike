@@ -20,7 +20,9 @@ describe Roguelike::MapGenerator do
     end
 
     it "should use the standard ruby Random class and the current epoch time if no rng or seed were passed in" do
-      Time.should_receive(:now).and_return(mock Time, :strftime => "123")
+      timeobj = mock Time
+      timeobj.should_receive(:strftime).with("%s").and_return("123")
+      Time.should_receive(:now).and_return(timeobj)
       Random.should_receive(:new).with(123)
       map_generator = Roguelike::MapGenerator.new()
     end
@@ -37,9 +39,9 @@ describe Roguelike::MapGenerator do
   it "should generate a bsp tree of the given area" do
     pending
     map_generator = Roguelike::MapGenerator.new(:height => 21, :width => 80, :rng => Nrng, :seed => 123)
-    map_generator.bsp_tree(:depth => 1).should == 
-    BspNode.new(:width => 80, :height => 21, :x => 0, :y => 0, 
-      :sub_nodes => [
+    map_generator.bsp_tree(:depth => 1).should ==
+    BspNode.new(:width => 80, :height => 21, :x => 0, :y => 0,
+      :subnodes => [
         BspNode.new(:width => 40, :height => 21, :x => 0, :y => 0, :subnodes => nil),
         BspNode.new(:width => 40, :height => 21, :x => 41, :y => 0, :subnodes => nil)
       ]
