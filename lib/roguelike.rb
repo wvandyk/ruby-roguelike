@@ -1,6 +1,8 @@
 require 'ncurses'
 require 'roguelike/renderer'
 require 'roguelike/map_generator'
+require 'roguelike/bsp_node'
+require 'roguelike/non_random_bsp_builder'
 require 'roguelike/version'
 
 module Roguelike
