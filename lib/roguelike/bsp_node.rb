@@ -1,12 +1,12 @@
-# TODO
-# Implement vert & horizontal offsets in BspNode
 class BspNode
-  attr_reader :width, :subnodes, :height
+  attr_reader :width, :subnodes, :height, :xoffset, :yoffset
 
   def initialize(options = {})
     @subnodes = options[:subnodes] || []
-    @width = options[:width] || nil
-    @height = options[:height] || nil
+    @width = options[:width] || 0
+    @height = options[:height] || 0
+    @xoffset = options[:xoffset] || 0
+    @yoffset = options[:yoffset] || 0
   end
 
   def ==(other_instance)
@@ -14,7 +14,7 @@ class BspNode
   end
 
   def attributes
-    {:subnodes => subnodes, :width => width, :height => height}
+    {:subnodes => subnodes, :width => width, :height => height, :xoffset => xoffset, :yoffset => yoffset}
   end
 
   def subnodes=(array_of_subnodes)
