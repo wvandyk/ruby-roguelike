@@ -1,7 +1,6 @@
 class BspBuilder
   def initialize(options = {})
     @bsp_algorithm = options[:bsp_algorithm] || NonRandomBsp.new
-    @node_class = BspNode
     @root_node = options[:root_node]
   end
 
