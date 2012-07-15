@@ -1,3 +1,8 @@
+require File.dirname(__FILE__)+'/bsp/bsp_node'
+require File.dirname(__FILE__)+'/bsp/bsp_builder'
+require File.dirname(__FILE__)+'/bsp/non_random_bsp_algorithm'
+require File.dirname(__FILE__)+'/bsp/random_bsp_algorithm'
+
 module Roguelike
 
   # Will implement the bsp map generation algorithm as given at:
