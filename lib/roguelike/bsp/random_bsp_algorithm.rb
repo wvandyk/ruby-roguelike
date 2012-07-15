@@ -1,32 +1,15 @@
-class RandomBsp
+require File.dirname(__FILE__)+'/bsp_algorithm'
+
+class RandomBsp < BspAlgorithm
 
   MIN_NODE_WIDTH = 3
   MIN_NODE_HEIGHT = 3
-  @@rng = Random
-
-  def initialize(node, node_class)
-    @node = node
-    @node_class = node_class
-  end
-
-  def self.setrng(rng)
-    @@rng = rng
-  end
-
-  def chop_volume
-    case cutting_direction
-    when :vertical
-      nodes_from_vertical_cut
-    when :horizontal
-      nodes_from_horizontal_cut
-    end
-  end
 
   private
 
   def cutting_direction
     cutting_directions = [:vertical, :horizontal]
-    cutting_directions[@@rng.rand(cutting_directions.length)]
+    cutting_directions[@rng.rand(cutting_directions.length)]
   end
 
   def nodes_from_vertical_cut
@@ -48,7 +31,7 @@ class RandomBsp
   end
 
   def random_in_range(min, max)
-    @@rng.rand(max) + min
+    @rng.rand(max) + min
   end
 end
 

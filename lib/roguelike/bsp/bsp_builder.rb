@@ -1,9 +1,8 @@
 class BspBuilder
   def initialize(options = {})
-    @bsp_algorithm = options[:bsp_algorithm] || NonRandomBsp
-    @node_class = options[:node_class] || BspNode
-    @root_node = @node_class.new(:width => options[:width], 
-                                 :height => options[:height])
+    @bsp_algorithm = options[:bsp_algorithm] || NonRandomBsp.new
+    @node_class = BspNode
+    @root_node = options[:root_node]
   end
 
   def subdivide_volume_to_depth(depth = 0, working_node = @root_node)
@@ -21,6 +20,7 @@ class BspBuilder
   end
 
   def bsp_algorithm(node)
-    @bsp_algorithm.new(node, @node_class)
+    @bsp_algorithm.setnode(node)
+    @bsp_algorithm
   end
 end

@@ -1,18 +1,6 @@
-class NonRandomBsp
-  def initialize(working_node, node_class)
-    @node = working_node
-    @node_class = node_class
-  end
+require File.dirname(__FILE__)+'/bsp_algorithm'
 
-  def chop_volume
-    case cutting_direction
-    when :vertical
-      nodes_from_vertical_cut
-    when :horizontal
-      nodes_from_horizontal_cut
-    end
-  end
-
+class NonRandomBsp < BspAlgorithm
   private
 
   def cutting_direction

@@ -23,28 +23,26 @@ end
 
 describe "BspBuilder using the random bsp algorithm" do
   it "should still have a subdivide_volume_to_depth method" do
-    bsptree = BspBuilder.new(:bsp_algorithm => RandomBsp)
+    bsptree = BspBuilder.new(:bsp_algorithm => RandomBsp.new)
     bsptree.should respond_to(:subdivide_volume_to_depth)
   end
 
   it "should divide the given volume using the random algorithm" do
-    bsptree = BspBuilder.new(:bsp_algorithm => RandomBsp, :width => 40, :height => 40)
+    bsptree = BspBuilder.new(:bsp_algorithm => RandomBsp.new, :root_node => BspNode.new(:width => 40, :height => 40))
     subnodes = bsptree.subdivide_volume_to_depth(1).subnodes
     subnodes.first.class.should == BspNode
     subnodes.last.class.should == BspNode
   end
 
   context "using a mocked RNG" do
-
-    before(:all) do
-     RandomBsp.setrng(FakeRng)
+    before(:each) do
+      @random_bsp = RandomBsp.new
+      @random_bsp.setrng(FakeRng)
     end
 
     it "should divide a 40x40 volume horizontally into two 40x20 volumes" do
-      bsptree = BspBuilder.new(:bsp_algorithm => RandomBsp, :width => 40, :height => 40)
+      bsptree = BspBuilder.new(:bsp_algorithm => @random_bsp, :root_node => BspNode.new(:width => 40, :height => 40))
       bsptree.subdivide_volume_to_depth(1).should == volume_cut_with_random_algorithm
     end
   end
 end
-
-
